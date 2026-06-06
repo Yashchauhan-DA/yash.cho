@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Thread Turning Report</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+<style>
+body{
+    font-family: Arial, sans-serif;
+    margin:20px;
+}
+input, textarea{
+    width:100%;
+    padding:8px;
+    margin:5px 0;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+table,th,td{
+    border:1px solid #000;
+}
+th,td{
+    padding:8px;
+}
+button{
+    padding:10px 20px;
+    margin:10px 5px;
+}
+</style>
+</head>
+<body>
+
+<h2>Thread Turning Report</h2>
+
+<label>Reported By</label>
+<input type="text" id="reportedBy">
+
+<label>Location</label>
+<input type="text" id="location">
+
+<label>Date</label>
+<input type="date" id="date">
+
+<label>Thread</label>
+<input type="text" id="thread">
+
+<label>Standard</label>
+<input type="text" id="standard">
+
+<label>External / Internal</label>
+<input type="text" id="external">
+
+<label>Major Diameter</label>
+<input type="text" id="majorDiameter">
+
+<label>Pitch</label>
+<input type="text" id="pitch">
+
+<label>No. of Starts</label>
+<input type="text" id="starts">
+
+<label>Thread Length</label>
+<input type="text" id="threadLength">
+
+<h3>Workpiece</h3>
+
+<label>Identification No.</label>
+<input type="text" id="identification">
+
+<label>Material</label>
+<input type="text" id="material">
+
+<label>Hardness</label>
+<input type="text" id="hardness">
+
+<h3>Machine</h3>
+
+<label>Machine Type</label>
+<input type="text" id="machineType">
+
+<label>Controller</label>
+<input type="text" id="controller">
+
+<label>Coolant</label>
+<input type="text" id="coolant">
+
+<h3>Results</h3>
+
+<label>Failure / Wear / Breakage</label>
+<input type="text" id="failure">
+
+<label>Tool Life Per Corner</label>
+<input type="text" id="toolLife">
+
+<label>Cutting Time</label>
+<input type="text" id="cuttingTime">
+
+<label>Surface Finish</label>
+<input type="text" id="surfaceFinish">
+
+<label>Tool Cost / Thread</label>
+<input type="text" id="toolCost">
+
+<label>Additional Remark</label>
+<textarea id="remark"></textarea>
+
+<button onclick="downloadExcel()">Download Excel</button>
+<button onclick="window.print()">Print</button>
+
+<script>
+function downloadExcel(){
+
+const data = [
+["Reported By",document.getElementById("reportedBy").value],
+["Location",document.getElementById("location").value],
+["Date",document.getElementById("date").value],
+["Thread",document.getElementById("thread").value],
+["Standard",document.getElementById("standard").value],
+["External/Internal",document.getElementById("external").value],
+["Major Diameter",document.getElementById("majorDiameter").value],
+["Pitch",document.getElementById("pitch").value],
+["No. of Starts",document.getElementById("starts").value],
+["Thread Length",document.getElementById("threadLength").value],
+["Identification No",document.getElementById("identification").value],
+["Material",document.getElementById("material").value],
+["Hardness",document.getElementById("hardness").value],
+["Machine Type",document.getElementById("machineType").value],
+["Controller",document.getElementById("controller").value],
+["Coolant",document.getElementById("coolant").value],
+["Failure",document.getElementById("failure").value],
+["Tool Life",document.getElementById("toolLife").value],
+["Cutting Time",document.getElementById("cuttingTime").value],
+["Surface Finish",document.getElementById("surfaceFinish").value],
+["Tool Cost",document.getElementById("toolCost").value],
+["Remark",document.getElementById("remark").value]
+];
+
+const ws = XLSX.utils.aoa_to_sheet(data);
+const wb = XLSX.utils.book_new();
+XLSX.utils.book_append_sheet(wb, ws, "Report");
+XLSX.writeFile(wb, "Thread_Turning_Report.xlsx");
+}
+</script>
+
+</body>
+</html>
